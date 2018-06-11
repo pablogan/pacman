@@ -122,25 +122,12 @@ Packman.prototype.checkLimits = function() {
 
 Packman.prototype.checkEat = function(food) {
 
-    var collisions = food.filter(function(food){
-        return food.collide(this);
+    food = food.filter(function(food){
+        return !food.collide(this);
     }.bind(this));
 
-    collisions.forEach(function(food,i){
-        collisions.splice(i,1)
-    }.bind(this))
-
-
+    console.log(food)
 }
-
-//  Packman.prototype.checkEat = function(food) {
-//     food.forEach(function(f,i){
-//         if(f.collide(this)){
-//     food.splice(i,1)
-//     }bind.(this))
-//    }
-
-
 
 Packman.prototype.draw = function() {    
     //definir cada frames de la imagen
@@ -157,7 +144,6 @@ Packman.prototype.draw = function() {
     );
 
     this.drawCounter++;
-    console.log(this.drawCounter);
 
     this.animate();
 };
@@ -171,9 +157,7 @@ Packman.prototype.checkCollisions = function (obstacles){
     collisions.forEach(function(obstacle){
         if (obstacle instanceof Obstacle) {
             this.collideWithWall(obstacle);
-        } else if (obstacle instanceof Food) {
-            obstacle.isHidden = true;
-        }
+        } 
     }.bind(this))
  }
 

@@ -14,9 +14,12 @@ Food.prototype.draw = function(){
     this.ctx.fillRect(this.x, this.y, this.height, this.weight);
 }
 
-Food.prototype.collide =  function (obstacle){
-    return !(this.x + this.w < obstacle.x || 
-        this.x > obstacle.x + obstacle.w ||
-        this.y + this.h < obstacle.y ||
-        this.y > obstacle.y + obstacle.h);
+// Repasar estas colisiones
+
+Food.prototype.collide =  function (packman){
+    console.log(packman)
+    return !(this.x + this.w < packman.x || 
+    this.x > packman.x + packman.w ||
+        this.y + this.h < packman.y ||
+        this.y > packman.y + packman.h);
 }

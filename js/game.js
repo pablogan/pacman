@@ -1,19 +1,14 @@
 function Game(canvasId) {
     this.canvas = document.getElementById(canvasId);
     this.canvas.width = 660;
-    this.canvas.height = 650;
+    this.canvas.height = 640;
     this.ctx = this.canvas.getContext('2d');
     this.fps = 50;
-    this.drawIntervalId = undefined;
-
-    
+    this.drawIntervalId = undefined; 
     this.obstacles = []
     this.food = []
     this.generateObstacles();
-
     this.packman = new Packman(this.ctx);
-
-    console.log('Iniciando game')
 }
 
 Game.prototype.start = function() {
@@ -77,7 +72,7 @@ Game.prototype.generateObstacles = function() {
     this.food.push(new Food(this.ctx, 30, 540));
     this.food.push(new Food(this.ctx, 30, 570));
     this.food.push(new Food(this.ctx, 30, 600));
-    this.food.push(new Food(this.ctx, 30, 630));
+   
 
 
     this.food.push(new Food(this.ctx, 265, 30));
@@ -100,7 +95,7 @@ Game.prototype.generateObstacles = function() {
     this.food.push(new Food(this.ctx, 265, 540));
     this.food.push(new Food(this.ctx, 265, 570));
     this.food.push(new Food(this.ctx, 265, 600));
-    this.food.push(new Food(this.ctx, 265, 630));
+ 
 
     this.food.push(new Food(this.ctx, 390, 30));
     this.food.push(new Food(this.ctx, 390, 60));
@@ -122,7 +117,7 @@ Game.prototype.generateObstacles = function() {
     this.food.push(new Food(this.ctx, 390, 540));
     this.food.push(new Food(this.ctx, 390, 570));
     this.food.push(new Food(this.ctx, 390, 600));
-    this.food.push(new Food(this.ctx, 390, 630));
+    
 
 
     this.food.push(new Food(this.ctx, 630, 30));
@@ -145,7 +140,7 @@ Game.prototype.generateObstacles = function() {
     this.food.push(new Food(this.ctx, 630, 540));
     this.food.push(new Food(this.ctx, 630, 570));
     this.food.push(new Food(this.ctx, 630, 600));
-    this.food.push(new Food(this.ctx, 630, 630));
+    
 
 
     this.food.push(new Food(this.ctx, 60, 30));
@@ -185,43 +180,23 @@ Game.prototype.generateObstacles = function() {
 
 
     this.food.push(new Food(this.ctx, 60, 600));
-    this.food.push(new Food(this.ctx, 90, 30));
-    this.food.push(new Food(this.ctx, 120, 30));
-    this.food.push(new Food(this.ctx, 150, 30));
-    this.food.push(new Food(this.ctx, 180, 30));
-    this.food.push(new Food(this.ctx, 210, 30));
-    this.food.push(new Food(this.ctx, 240, 30));
-    this.food.push(new Food(this.ctx, 300, 30));
-    this.food.push(new Food(this.ctx, 330, 30));
-    this.food.push(new Food(this.ctx, 360, 30));
-    this.food.push(new Food(this.ctx, 420, 30));
-    this.food.push(new Food(this.ctx, 450, 30));
-    this.food.push(new Food(this.ctx, 480, 30));
-    this.food.push(new Food(this.ctx, 510, 30));
-    this.food.push(new Food(this.ctx, 540, 30));
-    this.food.push(new Food(this.ctx, 570, 30));
-    this.food.push(new Food(this.ctx, 600, 30));
+    this.food.push(new Food(this.ctx, 90, 600));
+    this.food.push(new Food(this.ctx, 120, 600));
+    this.food.push(new Food(this.ctx, 150, 600));
+    this.food.push(new Food(this.ctx, 180, 600));
+    this.food.push(new Food(this.ctx, 210, 600));
+    this.food.push(new Food(this.ctx, 240, 600));
+    this.food.push(new Food(this.ctx, 300, 600));
+    this.food.push(new Food(this.ctx, 330, 600));
+    this.food.push(new Food(this.ctx, 360, 600));
+    this.food.push(new Food(this.ctx, 420, 600));
+    this.food.push(new Food(this.ctx, 450, 600));
+    this.food.push(new Food(this.ctx, 480, 600));
+    this.food.push(new Food(this.ctx, 510, 600));
+    this.food.push(new Food(this.ctx, 540, 600));
+    this.food.push(new Food(this.ctx, 570, 600));
+    this.food.push(new Food(this.ctx, 600, 600));
 
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-    
-
-
-
-    
-    
 }
 
 Game.prototype.clear = function() {
@@ -255,13 +230,17 @@ Game.prototype.checkCollisions = function () {
 }
 
 Game.prototype.checkEat = function () {
-    this.packman.checkEat(this.food);
+    this.food = this.food.filter(function(food){
+        return !food.collide(this.packman);
+    }.bind(this));
+    console.log(this.food)
+    // this.packman.checkEat(this.food);
 }
 
 Game.prototype.checkWin = function () {
     if (this.food.length === 0){
         this.win ();
-    }console.log(this.food);
+    }
 }
 
 Game.prototype.win = function() {
